@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fetchAllColors, fetchAllManufacturers, fetchCars, getCarsUrlByQuery } from '../util/utils'
+import { fetchAllColors, fetchAllManufacturers, getCarsUrlByQuery } from '../util/utils'
 
 const AppContext = React.createContext({})
 
@@ -13,7 +13,7 @@ export const Provider = (props) => {
     const [filterObject, setFilterObject] = useState({
         color: '',
         manufacturer: '',
-        page: 1
+        page: 1,
     })
 
     const [carsData, setCarsData] = useState({
@@ -21,46 +21,52 @@ export const Provider = (props) => {
         totalPageCount: 0,
         totalCarsCount: 0,
     })
-
+    
     const [filterOptions, setFilterOptions] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
 
     useEffect(() => {
-        const fetchAllData = async (filters) => {
+
+        const fetchColorsAndManufacturers = async () => {
             setIsLoading(true)
             try {
-                //Fetch cars with filter
-                if(filters) {
-                    const fetchAllCarsUrl = getCarsUrlByQuery(filters)
-                    const result = await fetch(fetchAllCarsUrl)
-                    const response = await result.json()
-                    setCarsData({...response})
-                }
-                else {//Initial calls for filters and cars
-                    const fetchDataUrls = [fetchAllColors, fetchAllManufacturers, fetchCars]
-                    const [ {colors}, {manufacturers}, cars ] = await Promise.all(
-                        fetchDataUrls.map(async (fetchData) => {
+                    const fetchDataUrls = [ fetchAllColors, fetchAllManufacturers]
+                    const [ {colors}, {manufacturers} ] = await Promise.all(
+                        fetchDataUrls.map( async (fetchData) => {
                             const result = await fetch(fetchData)
                             return result.json()
                         })
                     )
                     setFilterOptions({colors, manufacturers})
-                    setCarsData(cars)
-                }
-                setIsLoading(false)
             } catch(e) {
                 setIsLoading(false)
                 setIsError(true)
             }
 
         }
-        //Fetch call for cars and filters
-        fetchAllData(filterOptions.colors && filterObject)
+        //Fetch call for filters
+        fetchColorsAndManufacturers()
 
+    },[])
+
+    useEffect(() => {
+        const fetchCarsWithFilter = async () => {
+             setIsLoading(true)
+             try{
+                const fetchAllCarsUrl = getCarsUrlByQuery(filterObject)
+                const result = await fetch(fetchAllCarsUrl)
+                const response = await result.json()
+                setCarsData({...response})
+                setIsLoading(false)
+             }catch(e) {
+                 setIsLoading(false)
+                 setIsError(true)
+             }
+        }
+        fetchCarsWithFilter(filterObject)
     },[filterObject])
-
 
     const actions = {
         setFilterObject,
