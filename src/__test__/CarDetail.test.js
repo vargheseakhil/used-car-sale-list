@@ -1,7 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, waitFor, fireEvent } from '@testing-library/react';
-import { shape } from 'prop-types'
 import CarDetail from '../components/CarDetail';
 import { checkIsFavourite } from '../util/utils'
 

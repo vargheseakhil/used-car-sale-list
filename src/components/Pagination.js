@@ -40,11 +40,31 @@ const Pagination = () => {
     const { page } = filterObject
     return(
     <Container className={classes.root}>
-        <Button className={classes.pageButton} onClick={() => setFilterObject({...filterObject, page: 1})} disabled={totalCarsCount <= 10 || page === 1}>First</Button>
-        <Button className={classes.pageButton} onClick={() => setFilterObject({...filterObject, page: page - 1})} disabled={page === 1}> Previous </Button>
+        <Button 
+            className={classes.pageButton}
+            onClick={() => setFilterObject({...filterObject, page: 1})} 
+            disabled={totalCarsCount <= 10 || page === 1}
+            >First
+        </Button>
+        <Button 
+            className={classes.pageButton} 
+            onClick={() => setFilterObject({...filterObject, page: page - 1})} 
+            disabled={page === 1}
+            > Previous
+        </Button>
         <div className={classes.pageTitle} data-testid="pageInfo"> Page {page} of {totalPageCount} </div>
-        <Button className={classes.pageButton}  onClick={() => setFilterObject({...filterObject, page: page + 1 })} disabled={page === totalPageCount}> Next </Button>
-        <Button className={classes.pageButton}  onClick={() => setFilterObject((filterObject) => ({...filterObject, page: totalPageCount})) } disabled={totalCarsCount <= 10 || page === totalPageCount}>Last</Button>
+        <Button 
+            className={classes.pageButton}
+            onClick={() => setFilterObject({...filterObject, page: page + 1 })}
+            disabled={page === totalPageCount}>
+                Next
+        </Button>
+        <Button
+            className={classes.pageButton}
+            onClick={() => setFilterObject({...filterObject, page: totalPageCount}) }
+            disabled={totalCarsCount <= 10 || page === totalPageCount}>
+                Last
+        </Button>
     </Container>)
 }
 export default Pagination

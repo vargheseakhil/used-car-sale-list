@@ -22,7 +22,7 @@ describe('util > getCarsUrlByQuery, getCarsToNumber, getCarsFromNumber', () => {
         expect(getCarsUrl).toBe(`${fetchCars}?page=1`)
     })
 
-    test('should return showing car from count', () => {
+    test('should return showing car to count', () => {
         const showingTill =  getCarsToNumber(2, 100, 1000)
         expect(showingTill).toBe(20)
     })
