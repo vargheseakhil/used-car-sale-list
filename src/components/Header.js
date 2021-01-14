@@ -45,7 +45,7 @@ const Header = () => {
         <AppBar position="static" color="inherit" className={classes.root}>
         <Toolbar className={classes.navDisplayFlex}>
           <IconButton edge="start" color="inherit" aria-label="menu">
-            <Link to="/"><img data-testid='logo' src={logoUrl} className={classes.logo} /></Link>
+            <Link to="/"><img data-testid='logo' src={logoUrl} className={classes.logo} alt="logo"/></Link>
           </IconButton>
           <List component="nav" className={classes.navDisplayFlex}>
             {navLinks.map(({ title, path }) => (

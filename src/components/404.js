@@ -35,7 +35,7 @@ const NotFound = () => {
     const classes = useStyles()
     return (
         <Container maxWidth="sm" className={classes.root}>
-            <img data-testid="logo" src={logoUrl} className={classes.logo} />
+            <img data-testid="logo" src={logoUrl} className={classes.logo} alt="logo"/>
             <Typography className={classes.title}>
                 404 - Not Found
             </Typography>

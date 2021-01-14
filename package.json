@@ -1,5 +1,6 @@
 {
   "name": "car-list",
+  "author": "Varghese Babu",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

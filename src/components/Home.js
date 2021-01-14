@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Grid, Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import CarList from './CarList'
 import CarFilter from './CarFilter'
-import AppContext from './context'
 
 
 const useStyles = makeStyles({

@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 
 const Pagination = () => {
     const classes = useStyles()
-    const { fetchAllCars,
+    const {
         carsData:{ totalCarsCount, totalPageCount },
         filterObject,
         setFilterObject,
